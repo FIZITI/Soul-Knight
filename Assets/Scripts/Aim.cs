@@ -14,11 +14,11 @@ public class Aim : MonoBehaviour
         Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mouseCursorPos;
 
-        if (Input.GetKey(KeyCode.Escape)) 
+/*        if (Input.GetKey(KeyCode.Escape)) 
         {
             Cursor.visible = true;
             gameObject.SetActive(false);
-        }
+        }*/
 
         /*if (aimVisivle == true)
         {

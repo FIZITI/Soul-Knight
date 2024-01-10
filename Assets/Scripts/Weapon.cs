@@ -10,7 +10,5 @@ public class Weapon : MonoBehaviour
         {
             Instantiate(_bullet, transform.position, transform.rotation);
         }
-
-        
     }
 }

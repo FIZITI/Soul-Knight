@@ -4,7 +4,7 @@ public class RotateWeapon : MonoBehaviour
 {
     [SerializeField] Transform _centralObject;
 
-    void Update()
+    private void Update()
     {
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 0;

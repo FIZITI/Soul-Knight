@@ -3,6 +3,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private float _damage;
+
     private Rigidbody2D _rigidbody;
 
     private void Start()
@@ -23,6 +25,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            enemy_skilet enemy = collision.GetComponent<enemy_skilet>();
+            enemy._hp -= _damage;
+
             Destroy(gameObject);
         }
     }

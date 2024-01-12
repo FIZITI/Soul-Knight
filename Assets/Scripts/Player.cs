@@ -1,13 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float _speed;
-    
-    private Rigidbody2D _rigidbody;
+    [SerializeField] internal float _speed;
+    [SerializeField] internal static float _hp = 5;
 
+    private Rigidbody2D _rigidbody;
+    
     private bool _flipRight = true;
-    private float _horizontal;
+    internal static float _horizontal;
     private float _vertical;
 
     private void Awake()
@@ -28,6 +30,11 @@ public class Player : MonoBehaviour
 
         _rigidbody.velocity = new Vector2(_horizontal * _speed, _vertical * _speed);
 
+        if (_hp <= 0)
+        {
+            Death();
+        }
+
         /*if ((!_flipRight && _horizontal > 0) || (_flipRight && _horizontal < 0))
         {
             transform.localScale *= new Vector2(-1, 1);
@@ -38,5 +45,11 @@ public class Player : MonoBehaviour
     private void flip()
     {
         transform.localScale *= new Vector2(-1, 1);
+    }
+
+
+    internal void Death()
+    {
+        gameObject.SetActive(false);
     }
 }

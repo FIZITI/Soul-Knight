@@ -19,16 +19,10 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
+        else if (collision.gameObject.tag == "Enemy")
         {
-            enemy_skilet enemy = collision.GetComponent<enemy_skilet>();
-            enemy._hp -= _damage;
-
             Destroy(gameObject);
         }
     }
+
 }

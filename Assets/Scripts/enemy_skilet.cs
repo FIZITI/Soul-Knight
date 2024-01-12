@@ -3,7 +3,7 @@ using UnityEngine;
 public class enemy_skilet : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] internal float _hp = 3;
+    [SerializeField] internal static float _hp = 3;
     [SerializeField] private float _pushForce = 5;
 
     private GameObject Player;
@@ -45,10 +45,10 @@ public class enemy_skilet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-/*        if (collision.gameObject.tag.Equals("Bullet"))
+        if (collision.gameObject.tag.Equals("Bullet"))
         {
             _hp -= 1;
-        }*/
+        }
         if (collision.gameObject.tag.Equals("Player"))
         {
             Push(collision);
@@ -67,7 +67,6 @@ public class enemy_skilet : MonoBehaviour
 
         Vector2 direction = (collision.transform.position - transform.position) * 1000;
         direction.Normalize();
-        Debug.Log(direction);
         rb.AddForce(direction * _pushForce * 30, ForceMode2D.Impulse);
     }
 }

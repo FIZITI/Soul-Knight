@@ -51,35 +51,20 @@ public class enemy_skilet : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        push(collision);
+    }
+
+
+    internal void push(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("Player"))
         {
             Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
 
             Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             playerRigidbody.AddForce(pushDirection * _pushForce, ForceMode2D.Impulse);
-
-            /*            Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
-
-                        Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-                        playerRigidbody.velocity = pushDirection * _pushForce;*/
         }
     }
 
-
-
-
-
-    /*    private void OnCollisionEnter(Collision collision)
-        {
-            Push(collision);
-        }*/
-
-    /*    private void Push(Collider2D collision)
-        {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-
-            Vector2 direction = (collision.transform.position - transform.position);
-            direction.Normalize();
-            rb.velocity = Vector2.Lerp(rb.velocity, direction * _pushForce * 30, Time.deltaTime);
-        }*/
 }
+ 

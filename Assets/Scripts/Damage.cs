@@ -16,8 +16,10 @@ public class Damage : MonoBehaviour
         {
             switch (_enemyType)
             {
-                case EnemyType.SwordSkillet:
+                case EnemyType.SwordSkillet:    
+                    
                     TakeDamage(1);
+
                     break;
 
                 case EnemyType.BowSkillet:

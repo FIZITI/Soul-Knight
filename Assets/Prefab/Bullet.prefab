@@ -164,7 +164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 25
   _damage: 1
-  _addPullDamage: 1
 --- !u!1 &6646167761992132706
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class enemy_skilet : MonoBehaviour
     private SpriteRenderer EnemySprite;
 
     private Rigidbody2D _rb;
+    private Rigidbody2D _rbPlayer;
     private Transform target;
 
     private void Awake()
@@ -21,18 +22,23 @@ public class enemy_skilet : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindWithTag("Player");
+        _rbPlayer = Player.GetComponent<Rigidbody2D>();
         target = Player.transform;
     }
 
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+        LookAtTarget();
+    }
 
-        if (target.position.x < transform.position.x) 
+    private void LookAtTarget()
+    {
+        if (target.position.x < transform.position.x)
         {
             EnemySprite.flipX = true;
         }
-        else if(target.position.x > transform.position.x)
+        else if (target.position.x > transform.position.x)
         {
             EnemySprite.flipX = false;
         }
@@ -43,30 +49,37 @@ public class enemy_skilet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Bullet"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            _hp -= 1;
+            Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+
+            Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            playerRigidbody.AddForce(pushDirection * _pushForce, ForceMode2D.Impulse);
+
+            /*            Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+
+                        Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+                        playerRigidbody.velocity = pushDirection * _pushForce;*/
         }
-        if (collision.gameObject.tag.Equals("Player"))
+    }
+
+
+
+
+
+    /*    private void OnCollisionEnter(Collision collision)
         {
             Push(collision);
-        }
+        }*/
 
-    }
+    /*    private void Push(Collider2D collision)
+        {
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
 
-/*    private void OnCollisionEnter(Collision collision)
-    {
-        Push(collision);
-    }*/
-
-    private void Push(Collider2D collision)
-    {
-        Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-
-        Vector2 direction = (collision.transform.position - transform.position) * 1000;
-        direction.Normalize();
-        rb.AddForce(direction * _pushForce * 30, ForceMode2D.Impulse);
-    }
+            Vector2 direction = (collision.transform.position - transform.position);
+            direction.Normalize();
+            rb.velocity = Vector2.Lerp(rb.velocity, direction * _pushForce * 30, Time.deltaTime);
+        }*/
 }

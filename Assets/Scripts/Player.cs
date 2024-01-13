@@ -7,10 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField] internal static float _hp = 5;
 
     private Rigidbody2D _rigidbody;
-    
-    private bool _flipRight = true;
     internal static float _horizontal;
-    private float _vertical;
+    internal float _vertical;
+    private bool _isTouchingEnemy = false;
 
     private void Awake()
     {
@@ -23,33 +22,46 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
+    {
+        Move();
+        Death();  
+    }
+
+    private void Move()
     {
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _rigidbody.velocity = new Vector2(_horizontal * _speed, _vertical * _speed);
+        Vector2 inputDirection = new Vector2(_horizontal, _vertical).normalized;
 
-        if (_hp <= 0)
+        if (inputDirection != Vector2.zero)
         {
-            Death();
+            _rigidbody.velocity = inputDirection * _speed;
         }
-
-        /*if ((!_flipRight && _horizontal > 0) || (_flipRight && _horizontal < 0))
-        {
-            transform.localScale *= new Vector2(-1, 1);
-            _flipRight = !_flipRight;
-        }*/
     }
-
-    private void flip()
-    {
-        transform.localScale *= new Vector2(-1, 1);
-    }
-
 
     internal void Death()
     {
-        gameObject.SetActive(false);
+        if (_hp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
+    /*
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            _isTouchingEnemy = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            _isTouchingEnemy = false;
+        }
+    }*/
 }

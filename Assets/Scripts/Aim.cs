@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
-    /*private bool aimVisivle = false;*/
+    private bool aimVisivle = false;
 
     private void Awake()
     {
@@ -13,23 +13,25 @@ public class Aim : MonoBehaviour
     {
         Vector2 mouseCursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mouseCursorPos;
-       
+    }
 
-/*        if (Input.GetKey(KeyCode.Escape)) 
+    internal void CurVis()
+    {
+
+        if (Input.GetKey(KeyCode.Escape))
         {
-            Cursor.visible = true;
-            gameObject.SetActive(false);
-        }*/
+            aimVisivle = !aimVisivle;
+        }
 
-        /*if (aimVisivle == true)
+        if (aimVisivle == true)
         {
             Cursor.visible = true;
             gameObject.SetActive(false);
         }
         else if (aimVisivle == false)
         {
-            gameObject.SetActive(true);
             Cursor.visible = false;
-        }*/
+            gameObject.SetActive(true);
+        }
     }
 }

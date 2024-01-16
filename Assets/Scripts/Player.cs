@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] internal float _speed;
-    [SerializeField] internal static float _hp = 5;
+    [SerializeField] private float _speed;
+    [SerializeField] internal static float _hp = 5f;
+    [SerializeField] internal static float _shild = 3f;
 
     private Rigidbody2D _rigidbody;
     internal static float _horizontal;
     internal float _vertical;
-    private bool _isTouchingEnemy = false;
 
     private void Awake()
     {
@@ -48,20 +48,4 @@ public class Player : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            _isTouchingEnemy = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            _isTouchingEnemy = false;
-        }
-    }*/
 }

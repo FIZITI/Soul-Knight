@@ -33,8 +33,15 @@ public class Damage : MonoBehaviour
 
     internal void TakeDamage(float _Damage)
     {
-        Player._hp -= _Damage;
-        Debug.Log(Player._hp);
+        if (Player._shild <= 0)
+        {
+            Player._hp -= _Damage;
+        }
+        else
+        {
+            Player._shild -= _Damage;
+        }
+            
     }
 
 

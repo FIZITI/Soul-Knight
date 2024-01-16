@@ -3,12 +3,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private float _damage;
+    private float _damage;
 
     private Rigidbody2D _rigidbody;
 
     private void Start()
     {
+        _damage = Bows._BowsDamage;
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.velocity = transform.up * _speed;
     }

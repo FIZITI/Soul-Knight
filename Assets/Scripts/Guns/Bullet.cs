@@ -22,7 +22,8 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            enemy_skilet._hp -= _damage;
+            enemy_skilet enemy = collision.gameObject.GetComponent<enemy_skilet>();
+            enemy._hp -= _damage;
             Destroy(gameObject);
         }
     }
